@@ -8,6 +8,7 @@
  * 효과를 빼고 싶으면 아래 한 줄을 지우고 HTML의 data-fx도 지우면 됩니다.
  */
 
+import { mount as magnetic } from '../effects/magnetic-button/index.js';
 import { mount as model } from '../effects/model-showcase/index.js';
 
 /**
@@ -32,6 +33,10 @@ function readOpts(el, prefix) {
 }
 
 function boot() {
+  document.querySelectorAll('[data-fx~="magnetic"]').forEach((el) => {
+    const targets = el.querySelectorAll('.wf-btn, .wf-link, .wf-contact__mail');
+    if (targets.length) magnetic([...targets], readOpts(el, 'magnetic-button'));
+  });
   model('.fx-model');
 }
 
